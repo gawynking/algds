@@ -1,4 +1,4 @@
-package org.algds.graph.model.define;
+package org.algds.graph.model.matrix;
 
 import java.lang.reflect.Array;
 
