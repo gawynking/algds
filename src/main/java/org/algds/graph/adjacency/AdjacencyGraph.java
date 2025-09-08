@@ -1,7 +1,4 @@
-package org.algds.graph.model.adjacency;
-
-import org.algds.graph.model.Edge;
-import org.algds.graph.model.Vertex;
+package org.algds.graph.adjacency;
 
 import java.util.HashMap;
 import java.util.Map;

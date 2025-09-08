@@ -1,4 +1,4 @@
-package org.algds.graph.model;
+package org.algds.graph.adjacency;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
