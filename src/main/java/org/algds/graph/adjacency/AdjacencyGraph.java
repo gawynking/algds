@@ -1,6 +1,9 @@
 package org.algds.graph.adjacency;
 
+import org.algds.graph.model.EdgeListGraph;
+
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class AdjacencyGraph {
@@ -29,8 +32,13 @@ public class AdjacencyGraph {
         return edgeNum;
     }
 
+    public void addVertex(Vertex vertex){
+        this.getVertices().put(vertex.getId(),vertex);
+        this.vertexNum++;
+    }
 
     public void addEdge(Edge edge){
-
+        this.getVertices().get(edge.getFrom().getId()).addEdge(edge);
+        this.edgeNum++;
     }
 }
