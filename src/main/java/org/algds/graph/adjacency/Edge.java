@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Edge {
-    private static final AtomicInteger edgeIdCounter = new AtomicInteger(0);
+    private static final AtomicInteger edgeIdCounter = new AtomicInteger(1);
 
     private Integer id; // 订单ID,隐式ID,自增ID
     private Vertex from; // 起始节点

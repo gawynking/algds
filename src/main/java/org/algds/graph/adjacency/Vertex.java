@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Vertex {
-    private static final AtomicInteger nodeIdCounter = new AtomicInteger(0);
+    private static final AtomicInteger nodeIdCounter = new AtomicInteger(1);
 
     private Integer id; // 订单ID,隐式ID,自增ID
     private String name; // 顶点名称,显示ID

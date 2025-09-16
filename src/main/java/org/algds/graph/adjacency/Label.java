@@ -3,7 +3,7 @@ package org.algds.graph.adjacency;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Label {
-    private static final AtomicInteger labelIdCounter = new AtomicInteger(0);
+    private static final AtomicInteger labelIdCounter = new AtomicInteger(1);
 
     private Integer id; // 订单ID,隐式ID,自增ID
     private String label; // 标签类型

@@ -30,6 +30,10 @@ public class AdjacencyGraph {
         return edgeNum;
     }
 
+    public String getVertexName(Integer vertexId){
+        return this.getVertices().get(vertexId).getName();
+    }
+
     public void addVertex(Vertex vertex){
         this.getVertices().put(vertex.getId(),vertex);
         this.vertexNum++;
