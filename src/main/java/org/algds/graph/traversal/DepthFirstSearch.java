@@ -13,26 +13,33 @@ public class DepthFirstSearch {
      * 递归DFS（隐式栈）
      *
      * @param graph
-     * @param start
      */
-    public static void dfsRecursive(AdjacencyGraph graph, Vertex start) {
-        System.out.print("递归DFS遍历顺序：");
-        dfs(graph, start, new HashSet<>());
-        System.out.println();
+    public static List<List<Vertex>> dfsRecursive(AdjacencyGraph graph) {
+        List<List<Vertex>> dfsList = new ArrayList<>();
+        Set<Integer> visited = new HashSet<>();
+        for (Vertex vertex : graph.getVertices().values()) {
+            if (!visited.contains(vertex.getId())) {
+                List<Vertex> dfs = new ArrayList<>();
+                dfs(vertex, visited, dfs);
+                dfsList.add(dfs);
+            }
+        }
+        return dfsList;
     }
 
-    public static void dfs(AdjacencyGraph graph, Vertex start,Set<Integer> visited) {
+    public static List<Vertex> dfs(Vertex start, Set<Integer> visited, List<Vertex> dfs) {
         if (start == null) {
-            return;
+            return dfs;
         }
         visited.add(start.getId());
-        System.out.print(start.getName() + " ");
+        dfs.add(start);
         for (Edge edge : start.getEdgeList()) {
             Vertex neighbor = edge.getTo();
             if (!visited.contains(neighbor.getId())) {
-                dfs(graph,neighbor,visited);
+                dfs(neighbor, visited, dfs);
             }
         }
+        return dfs;
     }
 
 
@@ -40,46 +47,45 @@ public class DepthFirstSearch {
      * 非递归DFS（显式栈）
      *
      * @param graph
-     * @param start
      */
-    public static void dfsIterative(AdjacencyGraph graph, Vertex start) {
-        if (start == null) {
-            return;
-        }
+    public static List<List<Vertex>> dfsIterative(AdjacencyGraph graph) {
+
         Set<Integer> visited = new HashSet<>();
         Deque<Vertex> stack = new ArrayDeque<>();
-        stack.push(start);
-
-        System.out.print("显式栈DFS遍历顺序：");
-        while (!stack.isEmpty()) {
-            Vertex v = stack.pop();
-            if (!visited.contains(v.getId())) {
-                visited.add(v.getId());
-                System.out.print(v.getName() + " ");
-                // 倒序入栈以保持与递归顺序一致
-                List<Edge> edges = v.getEdgeList();
-                for (int i = edges.size() - 1; i >= 0; i--) {
-                    Vertex neighbor = edges.get(i).getTo();
-                    if (!visited.contains(neighbor.getId())) {
-                        stack.push(neighbor);
+        List<List<Vertex>> dfsList = new ArrayList<>();
+        for (Vertex vertex : graph.getVertices().values()) {
+            if (!visited.contains(vertex.getId())) {
+                stack.push(vertex);
+                List<Vertex> dfs = new ArrayList<>();
+                while (!stack.isEmpty()) {
+                    Vertex v = stack.pop();
+                    if (!visited.contains(v.getId())) {
+                        visited.add(v.getId());
+                        dfs.add(v);
+                        // 倒序入栈以保持与递归顺序一致
+                        List<Edge> edges = v.getEdgeList();
+                        for (int i = edges.size() - 1; i >= 0; i--) {
+                            Vertex neighbor = edges.get(i).getTo();
+                            if (!visited.contains(neighbor.getId())) {
+                                stack.push(neighbor);
+                            }
+                        }
                     }
                 }
+                dfsList.add(dfs);
             }
         }
-        System.out.println();
+        return dfsList;
     }
 
 
     /**
      * 主函数测试
-     *
-     *     A
-     *    / \
-     *   B   C
-     *   |    \
+     *    A             F
+     *    / \          / \
+     *   B   C        /   \
+     *   |    \      G     H
      *   D     E
-     *
-     * @param args
      */
     public static void main(String[] args) {
 
@@ -118,13 +124,48 @@ public class DepthFirstSearch {
         graph.addEdge(new Edge(C, E, 1, edgeLabel));
         graph.addEdge(new Edge(E, C, 1, edgeLabel));
 
+        // 构造多个树的图
+        Vertex F = new Vertex("F", vertexLabel);
+        Vertex G = new Vertex("G", vertexLabel);
+        Vertex H = new Vertex("H", vertexLabel);
+        graph.addVertex(F);
+        graph.addVertex(G);
+        graph.addVertex(H);
+        graph.addEdge(F, G, 1, edgeLabel);
+        graph.addEdge(F, H, 1, edgeLabel);
+
         // 打印顶点和边的数量
-        System.out.println(String.format("顶点数量 %s",graph.getVertexNum()));
-        System.out.println(String.format("边的数量 %s",graph.getEdgeNum()));
+        System.out.println(String.format("顶点数量 %s", graph.getVertexNum()));
+        System.out.println(String.format("边的数量 %s", graph.getEdgeNum()));
+
 
         // 执行DFS遍历
-        dfsRecursive(graph, A);     // 递归DFS
-        dfsIterative(graph, A);     // 显式栈DFS
+        List<List<Vertex>> dfsList = new ArrayList<>();
+        dfsList = dfsRecursive(graph);// 递归DFS
+        System.out.println(String.format("DFS递归(隐式栈)遍历顺序(共%s个子图)：", dfsList.size()));
+        for (int i = 0; i < dfsList.size(); i++) {
+            List<Vertex> bfs = dfsList.get(i);
+            System.out.println(String.format("--------- 第%s个子图 --------", (i + 1)));
+            System.out.print("    ");
+            for (Vertex vertex : bfs) {
+                System.out.print(vertex.getName() + " -> ");
+            }
+            System.out.println("end.");
+        }
+
+        System.out.println("======================================================");
+
+        dfsList = dfsIterative(graph);     // 显式栈DFS
+        System.out.println(String.format("DFS迭代(显式栈)遍历顺序(共%s个子图)：", dfsList.size()));
+        for (int i = 0; i < dfsList.size(); i++) {
+            List<Vertex> bfs = dfsList.get(i);
+            System.out.println(String.format("--------- 第%s个子图 --------", (i + 1)));
+            System.out.print("    ");
+            for (Vertex vertex : bfs) {
+                System.out.print(vertex.getName() + " -> ");
+            }
+            System.out.println("end.");
+        }
     }
 
 }

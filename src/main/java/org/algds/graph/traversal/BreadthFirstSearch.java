@@ -5,50 +5,49 @@ import org.algds.graph.adjacency.Edge;
 import org.algds.graph.adjacency.Label;
 import org.algds.graph.adjacency.Vertex;
 
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Set;
+import java.util.*;
 
 public class BreadthFirstSearch {
 
     /**
      * BFS实现：使用队列
      */
-    public static void bfs(AdjacencyGraph graph, Vertex start) {
-        if (start == null) {
-            return;
-        }
+    public static List<List<Vertex>> bfs(AdjacencyGraph graph) {
 
         Set<Integer> visited = new HashSet<>(); // 已访问集合
         Queue<Vertex> queue = new LinkedList<>(); // 队列实现BFS
-        queue.offer(start);
-        visited.add(start.getId());
 
-        System.out.print("BFS遍历顺序：");
-        while (!queue.isEmpty()) {
-            Vertex v = queue.poll();
-            System.out.print(v.getName() + " ");
-            for (Edge edge : v.getEdgeList()) {
-                Vertex neighbor = edge.getTo();
-                if (!visited.contains(neighbor.getId())) {
-                    visited.add(neighbor.getId());
-                    queue.offer(neighbor);
+        List<List<Vertex>> bfsList = new ArrayList<>();
+        for(Vertex vertex :graph.getVertices().values()) {
+            if (!visited.contains(vertex.getId())) {
+                queue.offer(vertex);
+                visited.add(vertex.getId());
+                List<Vertex> bfs = new ArrayList<>();
+                while (!queue.isEmpty()) {
+                    Vertex v = queue.poll();
+                    bfs.add(v);
+                    for (Edge edge : v.getEdgeList()) {
+                        Vertex neighbor = edge.getTo();
+                        if (!visited.contains(neighbor.getId())) {
+                            visited.add(neighbor.getId());
+                            queue.offer(neighbor);
+                        }
+                    }
                 }
+                bfsList.add(bfs);
             }
         }
-        System.out.println();
+        return bfsList;
     }
 
 
     /**
      * 主函数测试
-     *    A
-     *    / \
-     *   B   C
-     *   |    \
+     *    A             F
+     *    / \          / \
+     *   B   C        /   \
+     *   |    \      G     H
      *   D     E
-     * @param args
      */
     public static void main(String[] args) {
 
@@ -87,12 +86,36 @@ public class BreadthFirstSearch {
         graph.addEdge(new Edge(C, E, 1, edgeLabel));
         graph.addEdge(new Edge(E, C, 1, edgeLabel));
 
+
+        // 构造多个树的图
+        Vertex F = new Vertex("F", vertexLabel);
+        Vertex G = new Vertex("G", vertexLabel);
+        Vertex H = new Vertex("H", vertexLabel);
+        graph.addVertex(F);
+        graph.addVertex(G);
+        graph.addVertex(H);
+        graph.addEdge(F, G, 1, edgeLabel);
+        graph.addEdge(F, H, 1, edgeLabel);
+
+
         // 打印顶点和边的数量
         System.out.println(String.format("顶点数量 %s",graph.getVertexNum()));
         System.out.println(String.format("边的数量 %s",graph.getEdgeNum()));
 
         // 执行BFS
-        bfs(graph, A);
+        List<List<Vertex>> bfsList = bfs(graph);
+
+
+        System.out.println(String.format("BFS遍历顺序(共%s个子图)：", bfsList.size()));
+        for(int i=0; i<bfsList.size(); i++){
+            List<Vertex> bfs = bfsList.get(i);
+            System.out.println(String.format("--------- 第%s个子图 --------",(i+1)));
+            System.out.print("    ");
+            for(Vertex vertex:bfs){
+                System.out.print(vertex.getName()+" -> ");
+            }
+            System.out.println("end.");
+        }
     }
 
 }
