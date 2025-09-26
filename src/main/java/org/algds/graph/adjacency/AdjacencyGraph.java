@@ -30,6 +30,10 @@ public class AdjacencyGraph {
         return edgeNum;
     }
 
+    public Vertex getVertex(Integer vertexId){
+        return this.getVertices().get(vertexId);
+    }
+
     public String getVertexName(Integer vertexId){
         return this.getVertices().get(vertexId).getName();
     }
@@ -46,6 +50,12 @@ public class AdjacencyGraph {
 
     public void addEdge(Vertex from, Vertex to, int weight, Label label){
         Edge edge = new Edge(from, to, weight, label);
+        this.getVertices().get(edge.getFrom().getId()).addEdge(edge);
+        this.edgeNum++;
+    }
+
+    public void addEdge(Integer id, Vertex from, Vertex to, int weight, Label label){
+        Edge edge = new Edge(id, from, to, weight, label);
         this.getVertices().get(edge.getFrom().getId()).addEdge(edge);
         this.edgeNum++;
     }

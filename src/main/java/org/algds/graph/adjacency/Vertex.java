@@ -26,6 +26,14 @@ public class Vertex {
         this.edgeList = new HashMap<>();
     }
 
+    public Vertex(Integer id, String name, Label label) {
+        this.id = id;
+        this.name = name;
+        this.label = label;
+        this.properties = new HashMap<>();
+        this.edgeList = new HashMap<>();
+    }
+
 
     public Integer getId() {
         return id;
@@ -70,5 +78,12 @@ public class Vertex {
     public void addEdge(Vertex to, int weight, Label label) {
         Edge edge = new Edge(this, to, weight, label);
         this.edgeList.put(edge.getId(),edge);
+    }
+
+    @Override
+    public String toString() {
+        return "Vertex{" +
+                "name='" + name + '\'' +
+                '}';
     }
 }

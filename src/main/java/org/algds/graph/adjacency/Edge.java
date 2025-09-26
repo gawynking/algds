@@ -23,6 +23,15 @@ public class Edge {
         this.properties = new HashMap<>();
     }
 
+    public Edge(Integer id, Vertex from, Vertex to, int weight, Label label) {
+        this.id = id;
+        this.from = from;
+        this.to = to;
+        this.label = label;
+        this.weight = weight;
+        this.properties = new HashMap<>();
+    }
+
 
     public Integer getId() {
         return id;
