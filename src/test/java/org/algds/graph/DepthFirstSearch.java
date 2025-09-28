@@ -1,6 +1,6 @@
 package org.algds.graph;
 
-import org.algds.graph.adjacency.AdjacencyGraph;
+import org.algds.graph.adjacency.Graph;
 import org.algds.graph.adjacency.Edge;
 import org.algds.graph.adjacency.Label;
 import org.algds.graph.adjacency.Vertex;
@@ -15,13 +15,13 @@ public class DepthFirstSearch {
      * @param graph
      * @param start
      */
-    public static void dfsRecursive(AdjacencyGraph graph, Vertex start) {
+    public static void dfsRecursive(Graph graph, Vertex start) {
         System.out.print("递归DFS遍历顺序：");
         dfs(graph, start, new HashSet<>());
         System.out.println();
     }
 
-    public static void dfs(AdjacencyGraph graph, Vertex start,Set<Integer> visited) {
+    public static void dfs(Graph graph, Vertex start, Set<Integer> visited) {
         if (start == null) {
             return;
         }
@@ -42,7 +42,7 @@ public class DepthFirstSearch {
      * @param graph
      * @param start
      */
-    public static void dfsIterative(AdjacencyGraph graph, Vertex start) {
+    public static void dfsIterative(Graph graph, Vertex start) {
         if (start == null) {
             return;
         }
@@ -84,7 +84,7 @@ public class DepthFirstSearch {
     public static void main(String[] args) {
 
         // 构建图
-        AdjacencyGraph graph = new AdjacencyGraph();
+        Graph graph = new Graph();
 
         // 创建标签
         Label vertexLabel = new Label("V", 1);

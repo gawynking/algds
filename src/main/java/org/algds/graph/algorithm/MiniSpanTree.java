@@ -1,6 +1,6 @@
 package org.algds.graph.algorithm;
 
-import org.algds.graph.adjacency.AdjacencyGraph;
+import org.algds.graph.adjacency.Graph;
 import org.algds.graph.adjacency.Edge;
 import org.algds.graph.adjacency.Label;
 import org.algds.graph.adjacency.Vertex;
@@ -19,7 +19,7 @@ public class MiniSpanTree {
      * prim算法求解最小生成树 （广度优先）
      *
      */
-    public static List<Edge> primMST(AdjacencyGraph graph) {
+    public static List<Edge> primMST(Graph graph) {
 
         if (graph.getEdgeNum()==0) return Collections.emptyList();
 
@@ -57,7 +57,7 @@ public class MiniSpanTree {
      * Kruskal算法求解最小生成树 （边遍历）
      *
      */
-    public static List<Edge> kruskalMST(AdjacencyGraph graph) {
+    public static List<Edge> kruskalMST(Graph graph) {
 
         if (graph.getEdgeNum()==0) return Collections.emptyList();
 
@@ -111,7 +111,7 @@ public class MiniSpanTree {
     public static void main(String[] args) {
 
         // 构建图
-        AdjacencyGraph graph = new AdjacencyGraph();
+        Graph graph = new Graph();
 
         // 创建标签
         Label vertexLabel = new Label("V", 1);
@@ -197,7 +197,7 @@ public class MiniSpanTree {
         private Map<Vertex, Vertex> parent; // 构造森林
         private Map<Vertex, Integer> rank;
 
-        public UnionFind(AdjacencyGraph graph) {
+        public UnionFind(Graph graph) {
             parent = new HashMap<>();
             rank = new HashMap<>();
 

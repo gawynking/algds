@@ -4,7 +4,7 @@ package org.algds.graph.adjacency;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AdjacencyGraph {
+public class Graph {
 
     private Map<Integer, Vertex> vertices;
 
@@ -12,7 +12,7 @@ public class AdjacencyGraph {
     private Integer edgeNum;
 
 
-    public AdjacencyGraph(){
+    public Graph(){
         vertices = new HashMap<>();
         vertexNum = 0;
         edgeNum = 0;

@@ -1,6 +1,6 @@
 package org.algds.graph;
 
-import org.algds.graph.adjacency.AdjacencyGraph;
+import org.algds.graph.adjacency.Graph;
 import org.algds.graph.adjacency.Edge;
 import org.algds.graph.adjacency.Label;
 import org.algds.graph.adjacency.Vertex;
@@ -15,7 +15,7 @@ public class BreadthFirstSearch {
     /**
      * BFS实现：使用队列
      */
-    public static void bfs(AdjacencyGraph graph, Vertex start) {
+    public static void bfs(Graph graph, Vertex start) {
         if (start == null) {
             return;
         }
@@ -53,7 +53,7 @@ public class BreadthFirstSearch {
     public static void main(String[] args) {
 
         // 构建图
-        AdjacencyGraph graph = new AdjacencyGraph();
+        Graph graph = new Graph();
 
         // 创建标签
         Label vertexLabel = new Label("V", 1);

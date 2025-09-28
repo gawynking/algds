@@ -1,6 +1,6 @@
 package org.algds.graph.traversal;
 
-import org.algds.graph.adjacency.AdjacencyGraph;
+import org.algds.graph.adjacency.Graph;
 import org.algds.graph.adjacency.Edge;
 import org.algds.graph.adjacency.Label;
 import org.algds.graph.adjacency.Vertex;
@@ -12,7 +12,7 @@ public class BreadthFirstSearch {
     /**
      * BFS实现：使用队列
      */
-    public static List<List<Vertex>> bfs(AdjacencyGraph graph) {
+    public static List<List<Vertex>> bfs(Graph graph) {
 
         Set<Integer> visited = new HashSet<>(); // 已访问集合
         Queue<Vertex> queue = new LinkedList<>(); // 队列实现BFS
@@ -52,7 +52,7 @@ public class BreadthFirstSearch {
     public static void main(String[] args) {
 
         // 构建图
-        AdjacencyGraph graph = new AdjacencyGraph();
+        Graph graph = new Graph();
 
         // 创建标签
         Label vertexLabel = new Label("V", 1);

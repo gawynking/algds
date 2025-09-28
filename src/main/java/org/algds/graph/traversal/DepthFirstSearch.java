@@ -1,6 +1,6 @@
 package org.algds.graph.traversal;
 
-import org.algds.graph.adjacency.AdjacencyGraph;
+import org.algds.graph.adjacency.Graph;
 import org.algds.graph.adjacency.Edge;
 import org.algds.graph.adjacency.Label;
 import org.algds.graph.adjacency.Vertex;
@@ -14,7 +14,7 @@ public class DepthFirstSearch {
      *
      * @param graph
      */
-    public static List<List<Vertex>> dfsRecursive(AdjacencyGraph graph) {
+    public static List<List<Vertex>> dfsRecursive(Graph graph) {
         List<List<Vertex>> dfsList = new ArrayList<>();
         Set<Integer> visited = new HashSet<>();
         for (Vertex vertex : graph.getVertices().values()) {
@@ -48,7 +48,7 @@ public class DepthFirstSearch {
      *
      * @param graph
      */
-    public static List<List<Vertex>> dfsIterative(AdjacencyGraph graph) {
+    public static List<List<Vertex>> dfsIterative(Graph graph) {
 
         Set<Integer> visited = new HashSet<>();
         Deque<Vertex> stack = new ArrayDeque<>();
@@ -90,7 +90,7 @@ public class DepthFirstSearch {
     public static void main(String[] args) {
 
         // 构建图
-        AdjacencyGraph graph = new AdjacencyGraph();
+        Graph graph = new Graph();
 
         // 创建标签
         Label vertexLabel = new Label("V", 1);

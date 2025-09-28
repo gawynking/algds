@@ -1,6 +1,6 @@
 package org.algds.graph.algorithm;
 
-import org.algds.graph.adjacency.AdjacencyGraph;
+import org.algds.graph.adjacency.Graph;
 import org.algds.graph.adjacency.Edge;
 import org.algds.graph.adjacency.Label;
 import org.algds.graph.adjacency.Vertex;
@@ -13,7 +13,7 @@ public class ShortestPath {
      * 计算单源无权最短路径
      *
      */
-    public static Map<String,Map<Integer,Integer>> unweighted(AdjacencyGraph graph, Vertex start) {
+    public static Map<String,Map<Integer,Integer>> unweighted(Graph graph, Vertex start) {
 
         Queue<Vertex> queue = new LinkedList<>();
 
@@ -53,7 +53,7 @@ public class ShortestPath {
      * Dijkstra(迪杰斯特拉) 算法 计算 单源赋权最短路径
      *
      */
-    public static Map<String,Map<Integer,Integer>> dijkstra(AdjacencyGraph graph, Vertex start) {
+    public static Map<String,Map<Integer,Integer>> dijkstra(Graph graph, Vertex start) {
 
         PriorityQueue<Dist> queue = new PriorityQueue<>(Comparator.comparingInt(item -> item.getDist()));
 
@@ -123,7 +123,7 @@ public class ShortestPath {
      * 打印最短路径结果
      *
      */
-    public static void printResults(AdjacencyGraph graph, Map<String, Map<Integer, Integer>> result) {
+    public static void printResults(Graph graph, Map<String, Map<Integer, Integer>> result) {
 
         Map<Integer, Integer> preVertex = result.get("preVertex");
         Map<Integer, Integer> dist = result.get("dist");
@@ -181,7 +181,7 @@ public class ShortestPath {
     public static void main(String[] args) {
 
         // 构建图
-        AdjacencyGraph graph = new AdjacencyGraph();
+        Graph graph = new Graph();
 
         // 创建标签
         Label vertexLabel = new Label("V", 1);

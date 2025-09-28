@@ -1,6 +1,6 @@
 package org.algds.graph.algorithm;
 
-import org.algds.graph.adjacency.AdjacencyGraph;
+import org.algds.graph.adjacency.Graph;
 import org.algds.graph.adjacency.Edge;
 import org.algds.graph.adjacency.Label;
 import org.algds.graph.adjacency.Vertex;
@@ -22,7 +22,7 @@ public class CriticalPath {
      *
      * @param graph
      */
-    public static List<Vertex> criticalPath(AdjacencyGraph graph) {
+    public static List<Vertex> criticalPath(Graph graph) {
 
         TopSortResult topSort = topSortKahn(graph);
         if (null == topSort) {
@@ -60,7 +60,7 @@ public class CriticalPath {
     }
 
 
-    public static TopSortResult topSortKahn(AdjacencyGraph graph) {
+    public static TopSortResult topSortKahn(Graph graph) {
 
         // 1. 计算每个节点的入度 时间复杂度 V+E
         Map<Integer, Integer> indegree = new HashMap<>();
@@ -134,7 +134,7 @@ public class CriticalPath {
     public static void main(String[] args) {
 
         // 构建图
-        AdjacencyGraph graph = new AdjacencyGraph();
+        Graph graph = new Graph();
 
         // 创建标签
         Label vertexLabel = new Label("V", 1);

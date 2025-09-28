@@ -1,6 +1,6 @@
 package org.algds.graph.algorithm;
 
-import org.algds.graph.adjacency.AdjacencyGraph;
+import org.algds.graph.adjacency.Graph;
 import org.algds.graph.adjacency.Edge;
 import org.algds.graph.adjacency.Label;
 import org.algds.graph.adjacency.Vertex;
@@ -20,7 +20,7 @@ public class FindArticulAlgorithm {
      *
      * @param graph
      */
-    public static Set<Integer> findArticul(AdjacencyGraph graph) {
+    public static Set<Integer> findArticul(Graph graph) {
 
         Set<Integer> articulSet = new HashSet<>();
         Map<Integer, Integer> visited = new HashMap<>();
@@ -94,7 +94,7 @@ public class FindArticulAlgorithm {
     public static void main(String[] args) {
 
         // 构建图
-        AdjacencyGraph graph = new AdjacencyGraph();
+        Graph graph = new Graph();
 
         // 创建标签
         Label vertexLabel = new Label("V", 1);

@@ -1,6 +1,6 @@
 package org.algds.graph.algorithm;
 
-import org.algds.graph.adjacency.AdjacencyGraph;
+import org.algds.graph.adjacency.Graph;
 import org.algds.graph.adjacency.Edge;
 import org.algds.graph.adjacency.Label;
 import org.algds.graph.adjacency.Vertex;
@@ -21,7 +21,7 @@ public class FloydAlgorithm {
     /**
      * 使用Floyd算法计算所有顶点对之间的最短路径
      */
-    public static Map<String, int[][]> floyd(AdjacencyGraph graph) {
+    public static Map<String, int[][]> floyd(Graph graph) {
 
         // 通过邻接表构造邻接矩阵
 //        int[][] metrix = {
@@ -114,7 +114,7 @@ public class FloydAlgorithm {
     public static void main(String[] args) {
 
         // 构建图
-        AdjacencyGraph graph = new AdjacencyGraph();
+        Graph graph = new Graph();
 
         // 创建标签
         Label vertexLabel = new Label("V", 1);
@@ -158,7 +158,7 @@ public class FloydAlgorithm {
     }
 
     // 打印多源最短路径
-    private static void printShortestPath(AdjacencyGraph graph, int[][] next) {
+    private static void printShortestPath(Graph graph, int[][] next) {
         int n = next.length;
         for (int i = 0; i < n; i++) {
             System.out.println(String.format("源点: %s", graph.getVertexName(i + 1)));

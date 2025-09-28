@@ -1,6 +1,6 @@
 package org.algds.graph.algorithm;
 
-import org.algds.graph.adjacency.AdjacencyGraph;
+import org.algds.graph.adjacency.Graph;
 import org.algds.graph.adjacency.Edge;
 import org.algds.graph.adjacency.Label;
 import org.algds.graph.adjacency.Vertex;
@@ -18,7 +18,7 @@ public class KosarajuScc {
      * 强连通分量在反转后不变：如果将图中所有边的方向反转（称为转置图），那么原图的强连通分量结构在转置图中保持不变。
      *
      */
-    public static Result kosaraju(AdjacencyGraph graph) {
+    public static Result kosaraju(Graph graph) {
 
         List<List<Vertex>> kosaraju = new ArrayList<>();
 
@@ -32,7 +32,7 @@ public class KosarajuScc {
         }
 
         // 2 获取原图G的反向图Gr
-        AdjacencyGraph graphR = new AdjacencyGraph();
+        Graph graphR = new Graph();
         for (Vertex vertex : graph.getVertices().values()) {
             Vertex newFrom = new Vertex(vertex.getId(), vertex.getName(), vertex.getLabel());
             if (!graphR.getVertices().containsKey(newFrom.getId())) {
@@ -104,7 +104,7 @@ public class KosarajuScc {
      * @param counter
      * @return
      */
-    public static List<Vertex> rdfs(AdjacencyGraph graphR, Integer curVertexId, Set<Integer> visited, List<Vertex> scc, Map<Integer, Integer> sccMap, Integer counter) {
+    public static List<Vertex> rdfs(Graph graphR, Integer curVertexId, Set<Integer> visited, List<Vertex> scc, Map<Integer, Integer> sccMap, Integer counter) {
         if (null == curVertexId) {
             return scc;
         }
@@ -138,7 +138,7 @@ public class KosarajuScc {
     public static void main(String[] args) {
 
         // 构建图
-        AdjacencyGraph graph = new AdjacencyGraph();
+        Graph graph = new Graph();
 
         // 创建标签
         Label vertexLabel = new Label("V", 1);

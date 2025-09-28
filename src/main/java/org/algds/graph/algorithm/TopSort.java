@@ -1,6 +1,6 @@
 package org.algds.graph.algorithm;
 
-import org.algds.graph.adjacency.AdjacencyGraph;
+import org.algds.graph.adjacency.Graph;
 import org.algds.graph.adjacency.Edge;
 import org.algds.graph.adjacency.Label;
 import org.algds.graph.adjacency.Vertex;
@@ -17,7 +17,7 @@ public class TopSort {
      * @param graph 顶点集合 + 邻接表
      * @return
      */
-    public static List<Vertex> topSortKahn(AdjacencyGraph graph) {
+    public static List<Vertex> topSortKahn(Graph graph) {
 
         // 1. 计算每个节点的入度 时间复杂度 V+E
         Map<Integer, Integer> indegree = new HashMap<>();
@@ -95,7 +95,7 @@ public class TopSort {
     public static void main(String[] args) {
 
         // 构建图
-        AdjacencyGraph graph = new AdjacencyGraph();
+        Graph graph = new Graph();
 
         // 创建标签
         Label vertexLabel = new Label("V", 1);
