@@ -8,9 +8,11 @@ import org.algds.graph.adjacency.Vertex;
 import java.util.*;
 
 /**
- * 无向图 无环 连通
+ * 最小生成树（MST）的性质：
+ *  假设 N = (V, E) 是一个连通网，U 是顶点集 V 的一个非空子集。若 (u, v) 是一条具有最小权值的边，其中 u 属于 U，v 属于 V 减去 U，则必存在一棵包含边 (u, v) 的最小生成树。
+ *
  */
-public class MinimumSpanningTrees {
+public class MiniSpanTree {
 
 
     /**
@@ -91,6 +93,21 @@ public class MinimumSpanningTrees {
     }
 
 
+    /**
+     * 测试用例
+     *          2
+     *     V1 ---- V2
+     *    /  \     / \
+     *  4/   1\  3/ 10\
+     *  /   2  \ /  7  \
+     * V3 ---- V4 ---- V5
+     *  \      / \     /
+     *   \5   /8  \4  /6
+     *    \  /     \ /
+     *     V6 ---- V7
+     *          1
+     * @param args
+     */
     public static void main(String[] args) {
 
         // 构建图
@@ -117,6 +134,7 @@ public class MinimumSpanningTrees {
         graph.addVertex(v6);
         graph.addVertex(v7);
 
+        // 构造边
         graph.addEdge(v1,v2,2,edgeLabel);
         graph.addEdge(v1,v3,4,edgeLabel);
         graph.addEdge(v1,v4,1,edgeLabel);
@@ -149,6 +167,7 @@ public class MinimumSpanningTrees {
         graph.addEdge(v7,v6,1,edgeLabel);
 
 
+        // Prim算法求最小生成树
         System.out.println("Prim算法: ");
         List<Edge> edges = primMST(graph);
         System.out.println("Total weight: " + edges.stream().map(item -> item.getWeight()).reduce(0, Integer::sum));
@@ -158,6 +177,7 @@ public class MinimumSpanningTrees {
 
         System.out.println("----------------------------------------");
 
+        // Kruskal算法求最小生成树
         System.out.println("Kruskal算法: ");
         edges = kruskalMST(graph);
         System.out.println("Total weight: " + edges.stream().map(item -> item.getWeight()).reduce(0, Integer::sum));
