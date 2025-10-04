@@ -27,8 +27,7 @@ public class LevelOrderTraverse {
             print(current);
 
             // 将当前节点的所有子节点加入队列
-            List<TreeNode<T>> children = current.getChildren();
-            for (TreeNode<T> child : children) {
+            for (TreeNode<T> child : current.getChildren()) {
                 queue.offer(child);
             }
         }
@@ -57,7 +56,7 @@ public class LevelOrderTraverse {
         System.out.println("=== 树的孩子表示法 - 层序遍历演示 ===\n");
 
         // 构造树节点
-        TreeNode<String> A = new TreeNode<>("A");
+        TreeNode<String> root = new TreeNode<>("A");
         TreeNode<String> B = new TreeNode<>("B");
         TreeNode<String> C = new TreeNode<>("C");
         TreeNode<String> D = new TreeNode<>("D");
@@ -67,9 +66,9 @@ public class LevelOrderTraverse {
         TreeNode<String> H = new TreeNode<>("H");
 
         // 构建树结构
-        A.addChildren(B);
-        A.addChildren(C);
-        A.addChildren(D);
+        root.addChildren(B);
+        root.addChildren(C);
+        root.addChildren(D);
 
         B.addChildren(E);
         B.addChildren(F);
@@ -79,8 +78,8 @@ public class LevelOrderTraverse {
 
         // 层序遍历
         System.out.println("1. 层序遍历:");
-        levelOrderTraverse(A);
-        System.out.println();
+        levelOrderTraverse(root);
+        System.out.println("\n");
 
         System.out.println("=== 演示结束 ===");
     }

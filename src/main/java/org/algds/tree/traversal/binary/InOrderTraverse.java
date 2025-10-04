@@ -10,28 +10,28 @@ public class InOrderTraverse {
 
     /**
      * 递归中序遍历
-     * 时间复杂度：O(n)，空间复杂度：O(h)，h为树的高度
      */
-    public static void inorderRecursive(BinaryTreeNode<?> root) {
-        if (root != null) {
-            inorderRecursive(root.getLeft());   // 遍历左子树
-            print(root);                        // 访问根节点
-            inorderRecursive(root.getRight());  // 遍历右子树
-        }
+    public static void inOrderRecursive(BinaryTreeNode<?> root) {
+        if (root == null) return;
+
+        // print(root);                     // 前序访问
+        inOrderRecursive(root.getLeft());   // 遍历左子树
+        print(root);                        // 访问根节点-中序访问
+        inOrderRecursive(root.getRight());  // 遍历右子树
+        // print(root);                     // 后序访问
     }
 
     /**
      * 迭代中序遍历（使用栈）
-     * 时间复杂度：O(n)，空间复杂度：O(h)，h为树的高度
      */
-    public static void inorderIterative(BinaryTreeNode<?> root) {
+    public static void inOrderIterative(BinaryTreeNode<?> root) {
         if (root == null) return;
 
         Stack<BinaryTreeNode<?>> stack = new Stack<>();
         BinaryTreeNode<?> current = root;
 
         while (current != null || !stack.isEmpty()) {
-            // 将左子树的所有节点入栈
+            // 将左子树的所有节点入栈(向左走到尽头)
             while (current != null) {
                 stack.push(current);
                 current = current.getLeft();
@@ -46,9 +46,9 @@ public class InOrderTraverse {
         }
     }
 
+
     /**
      * Morris中序遍历
-     * 时间复杂度：O(n)，空间复杂度：O(1)
      */
     public static <T> void inorderMorris(BinaryTreeNode<T> root) {
         BinaryTreeNode<T> current = root;
@@ -79,6 +79,7 @@ public class InOrderTraverse {
         }
     }
 
+
     /**
      * 访问节点的方法
      */
@@ -96,32 +97,31 @@ public class InOrderTraverse {
      */
     public static void main(String[] args) {
 
-
         // 字符串类型的二叉树
         System.out.println("\n=== 字符串类型二叉树测试 ===");
-        BinaryTreeNode<String> strRoot = new BinaryTreeNode<>("A");
-        BinaryTreeNode<String> strB = new BinaryTreeNode<>("B");
-        BinaryTreeNode<String> strC = new BinaryTreeNode<>("C");
-        BinaryTreeNode<String> strD = new BinaryTreeNode<>("D");
-        BinaryTreeNode<String> strE = new BinaryTreeNode<>("E");
+        BinaryTreeNode<String> root = new BinaryTreeNode<>("A");
+        BinaryTreeNode<String> B = new BinaryTreeNode<>("B");
+        BinaryTreeNode<String> C = new BinaryTreeNode<>("C");
+        BinaryTreeNode<String> D = new BinaryTreeNode<>("D");
+        BinaryTreeNode<String> E = new BinaryTreeNode<>("E");
 
-        strRoot.setLeft(strB);
-        strRoot.setRight(strC);
-        strB.setLeft(strD);
-        strB.setRight(strE);
+        root.setLeft(B);
+        root.setRight(C);
+        B.setLeft(D);
+        B.setRight(E);
 
 
         System.out.print("递归中序遍历: ");
-        inorderRecursive(strRoot);
-        System.out.println();
+        inOrderRecursive(root);
+        System.out.println("\n");
 
         System.out.print("迭代中序遍历: ");
-        inorderIterative(strRoot);
-        System.out.println();
+        inOrderIterative(root);
+        System.out.println("\n");
 
         System.out.print("Morris中序遍历: ");
-        inorderMorris(strRoot);
-        System.out.println();
+        inorderMorris(root);
+        System.out.println("\n");
     }
 }
 

@@ -29,7 +29,7 @@ public class PostOrderTraverse {
 
 
     /**
-     * 基于栈的后序遍历
+     * 基于栈的后序遍历(双栈遍历)
      */
     public static <T> void postOrderStack(TreeNode<T> root) {
         if (root == null) {
@@ -80,7 +80,7 @@ public class PostOrderTraverse {
         System.out.println("=== 树的孩子表示法 - 后序遍历演示 ===\n");
 
         // 构造树节点
-        TreeNode<String> A = new TreeNode<>("A");
+        TreeNode<String> root = new TreeNode<>("A");
         TreeNode<String> B = new TreeNode<>("B");
         TreeNode<String> C = new TreeNode<>("C");
         TreeNode<String> D = new TreeNode<>("D");
@@ -90,9 +90,9 @@ public class PostOrderTraverse {
         TreeNode<String> H = new TreeNode<>("H");
 
         // 构建树结构
-        A.addChildren(B);
-        A.addChildren(C);
-        A.addChildren(D);
+        root.addChildren(B);
+        root.addChildren(C);
+        root.addChildren(D);
 
         B.addChildren(E);
         B.addChildren(F);
@@ -102,12 +102,12 @@ public class PostOrderTraverse {
 
         // 1 递归后序遍历
         System.out.println("1. 递归后序遍历结果:");
-        postOrderRecursive(A);
+        postOrderRecursive(root);
         System.out.println("\n");
 
         // 2 双栈法后序遍历
         System.out.println("2. 基于双栈的后序遍历结果:");
-        postOrderStack(A);
+        postOrderStack(root);
         System.out.println("\n");
 
         System.out.println("=== 演示结束 ===");

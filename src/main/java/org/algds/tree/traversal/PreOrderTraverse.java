@@ -1,6 +1,5 @@
 package org.algds.tree.traversal;
 
-
 import org.algds.tree.ds.TreeNode;
 
 import java.util.List;
@@ -19,7 +18,7 @@ public class PreOrderTraverse {
             return;
         }
 
-        // 处理当前节点 - 打印
+        // 处理当前节点
         print(root);
 
         // 递归处理所有子节点
@@ -27,6 +26,7 @@ public class PreOrderTraverse {
             preOrderRecursive(child);
         }
     }
+
 
     /**
      * 基于栈的先序遍历
@@ -51,8 +51,9 @@ public class PreOrderTraverse {
         }
     }
 
+
     /**
-     * 节点打印方法
+     * 访问节点方法，节点打印方法
      */
     private static <T> void print(TreeNode<T> node) {
         System.out.print(node.getData() + " ");
@@ -73,7 +74,7 @@ public class PreOrderTraverse {
         System.out.println("=== 树的孩子表示法 - 先序遍历演示 ===\n");
 
         // 1 构造树节点
-        TreeNode<String> A = new TreeNode<>("A");
+        TreeNode<String> root = new TreeNode<>("A");
         TreeNode<String> B = new TreeNode<>("B");
         TreeNode<String> C = new TreeNode<>("C");
         TreeNode<String> D = new TreeNode<>("D");
@@ -84,9 +85,9 @@ public class PreOrderTraverse {
 
 
         // 3 构建树结构
-        A.addChildren(B);
-        A.addChildren(C);
-        A.addChildren(D);
+        root.addChildren(B);
+        root.addChildren(C);
+        root.addChildren(D);
 
         B.addChildren(E);
         B.addChildren(F);
@@ -97,12 +98,12 @@ public class PreOrderTraverse {
 
         // 1 递归先序遍历
         System.out.println("1. 递归先序遍历结果:");
-        preOrderRecursive(A);
+        preOrderRecursive(root);
         System.out.println("\n");
 
         // 2 栈先序遍历
         System.out.println("2. 基于栈的先序遍历结果:");
-        preOrderStack(A);
+        preOrderStack(root);
         System.out.println("\n");
 
         System.out.println("=== 演示结束 ===");
