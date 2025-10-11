@@ -138,13 +138,6 @@ public class AVLTree<T extends Comparable<? super T>> implements Iterable<T> {
         return height(root);
     }
 
-    /**
-     * 检查树是否平衡（主要用于测试）
-     */
-    public boolean isBalanced() {
-        return isBalanced(root);
-    }
-
     @Override
     public Iterator<T> iterator() {
         return new InOrderIterator();
@@ -175,6 +168,50 @@ public class AVLTree<T extends Comparable<? super T>> implements Iterable<T> {
         if (t == null) return 0;
         return height(t.left) - height(t.right);
     }
+
+
+    /**
+     * AVL树旋转算法原理分析
+     *
+     * 我们把必须重新平衡的节点叫做α。由于任意节点最多有两个儿子，因此出现高度不平衡就需要α点的两棵子树的高度差2。容易看出，这种不平衡可能出现在下面四种情况中：
+     *     LL: 对α的左儿子的左子树进行一次插入。
+     *     LR: 对α的左儿子的右子树进行一次插入。
+     *     RL: 对α的右儿子的左子树进行一次插入。
+     *     RR: 对α的右儿子的右子树进行一次插入。
+     * 情形1和4是关于α点的镜像对称，而2和3是关于α点的镜像对称。因此，理论上只有两种情况，当然从编程的角度来看还是四种情形。
+     *
+     * 其中 k1 < k2 < k3 ，针对上述四种情况下通过旋转实现AVL树平衡如下面四种情况所示:
+     *
+     * 1 单旋转平衡:
+     * 场景1: LL 右旋转
+     *     k2          k1
+     *    /           / \
+     *   k1    -->   o1  k2
+     *  /
+     * o1
+     *
+     * 场景2: RR 左旋转
+     * k1                k2
+     *  \               / \
+     *   k2   -->      k1  o1
+     *    \
+     *     o1
+     *
+     * 2 双旋转平衡:
+     * 场景3: LR 双旋转(先左旋->再右旋)
+     *         k3           k3        k2
+     *        /            /          / \
+     *       k1  -->      k2   -->   k1  k3
+     *        \          /
+     *         k2       k1
+     *
+     * 场景4: RL 双旋转(先右旋->再左旋)
+     *     k1          k1               k2
+     *      \           \              /  \
+     *       k3  -->     k2    -->    k1  k3
+     *      /             \
+     *     k2              k3
+     */
 
 
     /**
