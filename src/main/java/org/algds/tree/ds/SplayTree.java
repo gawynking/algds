@@ -263,9 +263,8 @@ public class SplayTree<T extends Comparable<? super T>> {
                 if (t.left == nullNode) // 新根即tl的左子树为空，则说明不存在比x更小的元素，直接退出
                     break;
 
-                // 新树根赋值 rightTreeMin 及其 left
-                rightTreeMin.left = t;
-                rightTreeMin = t;
+                rightTreeMin.left = t; // L树赋值header.left
+                rightTreeMin = t; // 保存当前最小树，下次循环建立连接
 
                 t = t.left; // tl 存在左子树，则向下移动t为t的左子树，继续展开后续节点
             } else if (compareResult > 0) { // 2 展开节点大于根节点，即只能在右子树中
@@ -275,8 +274,8 @@ public class SplayTree<T extends Comparable<? super T>> {
                     break;
 
                 // 新树赋值给 leftTreeMax和leftTreeMax的right
-                leftTreeMax.right = t;
-                leftTreeMax = t;
+                leftTreeMax.right = t; // R树赋值header.left
+                leftTreeMax = t; // 保存当前最小树，下次循环建立连接
 
                 t = t.right; // tr 存在右子树，则向下移动t为t的右子树，继续展开后续节点
             } else { // 3 展开节点等于根节点，即展开几点即为根节点，无需其他动作
